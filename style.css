@@ -1,0 +1,158 @@
+/*slider*/
+body {margin:0; position: relative;}
+.part2 {display: flex; justify-content: center; width:100vw;}
+.part2 .galeria {
+  display: flex;
+  justify-content: center;
+  width: 715px;
+  transform-style: preserve-3d; /*Располагает элементы в трехмерном пространстве.Без этого свойства слайдер всё равно работает, но так лучше*/
+}
+.part2 .card { /*сами карточки, их свойства*/
+  background-size: 2px 2px, cover;
+  background-repeat: repeat, none;
+  background-position: 0 0;
+  width: 715px;
+  height: 477px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: 0 0 2rem rgba(0,0,0,.5);
+  border-radius: 23px;
+}
+.part2 .una { /*картинка для 1 карточки*/
+  background: url(IMG_5457.JPG) no-repeat;
+}
+.part2 .dos { /*картинка для 3 карточки*/
+  background: url(IMG_5524.JPG) no-repeat;
+}
+.part2 .tres { /*картинка для 2 карточки*/
+  background: url(IMG_5532.JPG) no-repeat;
+}
+.part2 .chet { /*картинка для 4 карточки*/
+  background: url(IMG_5772.JPG) no-repeat;
+}
+.part2 .pyat { /*картинка для 5 карточки*/
+  background: url(IMG_5901.JPG) no-repeat;
+}
+.part2 input {visibility: hidden;} /*прячем радиокнопки*/
+.part2 label { /*кнопки внизу, то есть их общее расположение*/
+    left: 22%;
+    top: 105%;
+    cursor: pointer;
+    margin: 25px 62px 0 25px;
+    position: relative;
+}
+.part2 label::before { /*прорисовываем кнопки без закрашенности внутри*/
+	border: none;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #F9B9B9;
+	content: " ";
+	display: block;
+	height: 28px;
+	left: -4px;
+	position: absolute;
+	top: -4px;
+	width: 28px;
+	border-radius: 50px;
+}
+#uno:checked ~ .una label:nth-child(3):after, 
+#dole:checked ~ .dos label:nth-child(3):after,
+#tele:checked ~ .tres label:nth-child(3):after,
+#four:checked ~ .chet label:nth-child(3):after,
+#five:checked ~ .pyat label:nth-child(3):after{ /*это работает для горизонтальных палочек белых, рядом с выбранным label*/
+  border: none;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #3DA8CA;
+	content: " ";
+	display: block;
+	height: 20px;
+	left: 0px;
+	position: absolute;
+	top: 0px;
+	width: 20px;
+	border-radius: 50px;
+}
+
+#uno:checked ~ .chet, /*связываем радиокнопки с карточками, при нажатии на 1 кнопку для 3 карточки*/
+#dole:checked ~ .una, /* при нажатии на 3 кнопку для 2 карточки*/
+#tele:checked ~ .pyat,
+#four:checked ~ .tres, 
+#five:checked ~ .dos{ /*при нажатии на 2 кнопку для 1 карточки una с картинкой screenshot (тут строка с фоном 32)*/
+  animation: 1s zye; /*@keyframes ye*/
+  animation-fill-mode: forwards; /*по итогу анимации применяется стиль последнего элемента в keyframes, то есть строка со 100%, есть ещё свойство backwards*/
+  transform-origin: center left; /*вращение - начинается с центра элемента, заканчивается его расположение справа*/
+  z-index: 3; /*на третьем плане*/
+}
+#uno:checked ~ .dos, /*связываем радиокнопки с карточками, при нажатии на 1 кнопку для 3 карточки*/
+#dole:checked ~ .pyat, /* при нажатии на 3 кнопку для 2 карточки*/
+#tele:checked ~ .chet,
+#four:checked ~ .una,
+#five:checked ~ .tres { /*при нажатии на 2 кнопку для 1 карточки una с картинкой screenshot (тут строка с фоном 32)*/
+  animation: 1.5s z-dch; /*@keyframes ye*/
+  animation-fill-mode: forwards; /*по итогу анимации применяется стиль последнего элемента в keyframes, то есть строка со 100%, есть ещё свойство backwards*/
+  transform-origin: center right; /*вращение - начинается с центра элемента, заканчивается его расположение справа*/
+  z-index: 3; /*на третьем плане*/
+}
+#uno:checked ~ .pyat, /*связываем радиокнопки с карточками, при нажатии на 1 кнопку для 3 карточки*/
+#dole:checked ~ .tres, /* при нажатии на 3 кнопку для 2 карточки*/
+#tele:checked ~ .una,
+#four:checked ~ .dos,
+#five:checked ~ .chet { /*при нажатии на 2 кнопку для 1 карточки una с картинкой screenshot (тут строка с фоном 32)*/
+  animation: 2s ye; /*@keyframes ye*/
+  animation-fill-mode: forwards; /*по итогу анимации применяется стиль последнего элемента в keyframes, то есть строка со 100%, есть ещё свойство backwards*/
+  transform-origin: center left; /*вращение - начинается с центра элемента, заканчивается его расположение справа*/
+  z-index: 4; /*на третьем плане*/
+}
+#uno:checked ~ .tres, /*при нажатии на 1 кнопку для 2 карточки*/
+#dole:checked ~ .chet, /*при нажатии на 3 кнопку для 1 карточки*/
+#tele:checked ~ .dos,
+#four:checked ~ .pyat,
+#five:checked ~ .una { /*при нажатии на 2 кнопку для 3 карточки*/
+  animation: 2.5s fuera-dch;
+  animation-fill-mode: forwards;
+  transform-origin: center right; /*располагается справа от центра*/
+  z-index: 4; /*на втором плане*/
+}
+#uno:checked ~ .una, /*при нажатии на 1 кнопку для 1 карточки*/
+#dole:checked ~ .dos, /*при нажатии на 3 кнопку для 3 карточки*/
+#tele:checked ~ .tres,
+#four:checked ~ .chet,
+#five:checked ~ .pyat { /*то есть при нажатии кнопки (1, 2, 3) соответствующая по счёту карточка выходит на 1 план*/
+  animation: 3s central; 
+  animation-fill-mode: forwards;
+  transform-origin: center center;
+  z-index: 5; /*на первом плане*/
+}
+@keyframes zye { /*создали правило ye для картинки с первого на последний план, % означают время выполнения анимации, то есть с 0 начинается, на 100 заканчивается */
+  0% {transform: scale(1) translatex(0%);}  /*исходные данные карточки*/
+  70% {transform: scale(.9) translatex(-30%);} /*чуть дальше середины анимации масштаб уменьшается на 0.1 и карточка сдвигается влево на 100% своей ширины*/
+  100% {transform: scale(.4066) translatex(-50%) translatey(-50%);} /*по итогу картинка сдвинута на 14% вправо от исходного местоположения и уменьшена на 02*/
+}
+@keyframes z-dch { /*правило для картинки с первого на второй план*/
+  0% {transform: scale(1) translatex(0%);} /*исходные данные карточки на момент начала анимации*/
+  70% {transform: scale(.9) translatex(30%);} /*сдвигается вправо на 100% своей ширины*/
+  100% {transform: scale(.4066) translatex(50%) translatey(-50%);} /*по итогу картинка сдвинута на 7% вправо от главного изображения(исходного местоположения)*/
+}
+@keyframes ye { /*создали правило ye для картинки с первого на последний план, % означают время выполнения анимации, то есть с 0 начинается, на 100 заканчивается */
+  0% {transform: scale(1) translatex(0%) ;}  /*исходные данные карточки*/
+  70% {transform: scale(.9) translatex(-50%) translatey(50%);} /*чуть дальше середины анимации масштаб уменьшается на 0.1 и карточка сдвигается влево на 100% своей ширины*/
+  100% {transform: scale(.5464) translatex(-20%) translatey(5%);} /*по итогу картинка сдвинута на 14% вправо от исходного местоположения и уменьшена на 02*/
+}
+@keyframes fuera-dch { /*правило для картинки с первого на второй план*/
+  0% {transform: scale(1) translatex(0%) ;} /*исходные данные карточки на момент начала анимации*/
+  70% {transform: scale(.9) translatex(50%) translatey(50%);} /*сдвигается вправо на 100% своей ширины*/
+  100% {transform: scale(.5464) translatex(20%) translatey(5%);} /*по итогу картинка сдвинута на 7% вправо от главного изображения(исходного местоположения)*/
+}
+@keyframes central { /*правило для первой картинки(главной). По итогу картинка переходит на первый план, изначально она или вторая или последняя*/
+  0% {transform: scale(.8);z-index: 3;} /*сначала не на первом плане*/
+  80% {transform: scale(.5);z-index: 4;}
+  100% {transform: scale(1) translatey(40%);z-index: 5;}/*теперь на первом плане*/
+}
+@keyframes pulso {
+  50% {opacity: .7;}
+}
+#uno:checked ~ .tres label, #uno:checked ~ .dos label, #uno:checked ~ .chet label, #uno:checked ~ .pyat label,
+#tele:checked ~ .una label, #tele:checked ~ .dos label, #tele:checked ~ .chet label, #tele:checked ~ .pyat label,
+#dole:checked ~ .tres label, #dole:checked ~ .una label, #dole:checked ~ .chet label, #dole:checked ~ .pyat label,
+#four:checked ~ .tres label, #four:checked ~ .una label, #four:checked ~ .dos label, #four:checked ~ .pyat label,
+#five:checked ~ .tres label, #five:checked ~ .dos label, #five:checked ~ .chet label, #five:checked ~ .una label {
+  visibility: hidden;
+}
